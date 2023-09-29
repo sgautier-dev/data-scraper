@@ -17,7 +17,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="fr">
-			<body className={`flex bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 ${inter.className}`}>
+			<body
+				className={`flex bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-100 ${inter.className}`}
+			>
 				<Sidebar />
 				{children}
 			</body>
