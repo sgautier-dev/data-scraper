@@ -1,11 +1,12 @@
 'use client'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { METHODS } from 'http'
 import { FormEvent, useRef } from 'react'
 
 export default function Search() {
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+  const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const input = inputRef.current?.value
@@ -16,12 +17,18 @@ export default function Search() {
     }
 
     try {
-		// Call API to activate scraper
+      const response = await fetch('/api/scraper', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ search: input }),
+      })
     } catch (e) {
-		// Handle errors
-	}
+      // Handle errors
+    }
 
-	// Wait for the response
+    // Wait for the response
   }
 
   return (
