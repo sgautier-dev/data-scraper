@@ -1,17 +1,18 @@
-import { DocumentMagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { DocumentMagnifyingGlassIcon } from '@heroicons/react/24/solid'
 
 export default function Sidebar() {
-	return (
-		<div className="p-2 md:p-10 py-6 overflow-y-auto border-b border-cyan-600/30 dark:border-cyan-400/30 border">
-			<div className="flex flex-col items-center justify-center mb-10">
-				<DocumentMagnifyingGlassIcon className="h-16 w-16 text-cyan-700" />
-                <h1 className="hidden md:inline text-center text-3xl mt-2 mb-2 font-bold">Data Scraper</h1>
-                <h2 className="hidden md:inline text-center text-xs italic">Scraping data from the web</h2>
-			</div>
-			<ul>
-
-
-            </ul>
-		</div>
-	);
+  return (
+    <div className="overflow-y-auto border-b border-cyan-600/30 p-2 py-6 dark:border-cyan-400/30 md:p-10">
+      <div className="mb-10 flex flex-col items-center justify-center">
+        <DocumentMagnifyingGlassIcon className="h-16 w-16 text-cyan-700" />
+        <h1 className="mb-2 mt-2 hidden text-center text-3xl font-bold md:inline">
+          Data Scraper
+        </h1>
+        <h2 className="hidden text-center text-xs italic md:inline">
+          Récupération de données de leboncoin
+        </h2>
+      </div>
+      <ul></ul>
+    </div>
+  )
 }

@@ -1,9 +1,12 @@
 'use client'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import Head from 'next/head'
+import { useRouter } from 'next/navigation'
 import { FormEvent, useRef } from 'react'
 
 export default function Search() {
   const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
   const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -23,15 +26,18 @@ export default function Search() {
         },
         body: JSON.stringify({ search: input }),
       })
+
+      const { collection_id, start_eta } = await response.json()
+      router.push(`/search/${collection_id}`)
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
 
     // Wait for the response
   }
 
   return (
-    <div className="">
+    <header>
       <form
         className="mx-auto flex max-w-md items-center justify-center space-x-2 rounded-full bg-slate-200 px-4 py-2"
         onSubmit={handleSearch}
@@ -45,6 +51,6 @@ export default function Search() {
         <button hidden>Recherche</button>
         <MagnifyingGlassIcon className="h-6 w-6 text-cyan-700" />
       </form>
-    </div>
+    </header>
   )
 }
