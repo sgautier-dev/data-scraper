@@ -1,6 +1,5 @@
 'use client'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import { METHODS } from 'http'
 import { FormEvent, useRef } from 'react'
 
 export default function Search() {
@@ -25,7 +24,7 @@ export default function Search() {
         body: JSON.stringify({ search: input }),
       })
     } catch (e) {
-      // Handle errors
+      console.log(e);
     }
 
     // Wait for the response
