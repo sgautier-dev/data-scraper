@@ -3,6 +3,7 @@ import { useDocument } from 'react-firebase-hooks/firestore'
 import { db } from '../../../../firebase'
 import { doc } from 'firebase/firestore'
 import Results from '@/components/Results'
+import GridLoader from 'react-spinners/GridLoader'
 
 type PropsType = {
   params: {
@@ -27,16 +28,16 @@ export default function SearchPage({ params: { id } }: PropsType) {
     return (
       <div className="flex flex-col items-center justify-between gap-y-5 py-10">
         <p className="animate-pulse text-center text-cyan-700">
-          Collecte des données en cours...
+          <GridLoader color="#22d3ee" size={50} aria-label="Loading Spinner" />
         </p>
       </div>
     )
   }
 
-  console.log("Results: ", snapshot.data()?.results)
+  console.log('Results: ', snapshot.data()?.results)
 
   return (
-    <div className='py-5'>
+    <div className="py-5">
       <div className="mb-7 flex items-center justify-between">
         <div className="flex flex-col gap-x-4 md:flex-row">
           <h1 className="font-bold">
