@@ -1,9 +1,10 @@
 'use client'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import { db } from '../../../../firebase'
-import { doc } from 'firebase/firestore'
+import { deleteDoc, doc } from 'firebase/firestore'
 import Results from '@/components/Results'
 import GridLoader from 'react-spinners/GridLoader'
+import { useRouter } from 'next/navigation'
 
 type PropsType = {
   params: {
@@ -13,6 +14,21 @@ type PropsType = {
 
 export default function SearchPage({ params: { id } }: PropsType) {
   const [snapshot, loading, error] = useDocument(doc(db, 'searches', id))
+  const router = useRouter()
+
+  const handleDelete = () => {
+    deleteDoc(doc(db, 'searches', id))
+    router.push('/')
+  }
+
+  const deleteButton = (
+    <button
+      className="rounded-lg bg-cyan-700 px-4 py-2 text-white"
+      onClick={handleDelete}
+    >
+      Supprimer la recherche
+    </button>
+  )
 
   if (loading) {
     return (
@@ -30,6 +46,7 @@ export default function SearchPage({ params: { id } }: PropsType) {
         <p className="animate-pulse text-center text-cyan-700">
           <GridLoader color="#22d3ee" size={50} aria-label="Loading Spinner" />
         </p>
+        {deleteButton}
       </div>
     )
   }
@@ -49,6 +66,7 @@ export default function SearchPage({ params: { id } }: PropsType) {
               `${snapshot.data()?.results?.length} résultats trouvés`}
           </p>
         </div>
+        {deleteButton}
       </div>
       {snapshot.data()?.results?.length > 0 && (
         <Results results={snapshot.data()?.results} />

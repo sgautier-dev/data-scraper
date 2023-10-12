@@ -16,6 +16,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-firebase-hooks": "^5.1.1",
+    "react-hot-toast": "^2.4.1",
     "react-spinners": "^0.13.8"
   },
   "devDependencies": {
