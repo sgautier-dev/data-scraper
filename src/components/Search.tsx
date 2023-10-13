@@ -1,8 +1,8 @@
 'use client'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useRef } from 'react'
+import toast from 'react-hot-toast'
 
 export default function Search() {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -13,6 +13,8 @@ export default function Search() {
 
     const input = inputRef.current?.value
     if (!input) return
+
+    const notification = toast.loading(`Démarrage d'un scraper pour: ${input}`)
 
     if (inputRef.current?.value) {
       inputRef.current.value = ''
@@ -28,9 +30,16 @@ export default function Search() {
       })
 
       const { collection_id, start_eta } = await response.json()
+
+      toast.success('Scraper a démarré avec succès', {
+        id: notification,
+      })
+      
       router.push(`/search/${collection_id}`)
     } catch (e) {
-      console.log(e)
+      toast.error('Oups... quelque chose a mal tourné!', {
+        id: notification,
+      })
     }
 
     // Wait for the response

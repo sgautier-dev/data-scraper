@@ -3,6 +3,7 @@ import Search from '@/components/Search'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import ClientProvider from '@/components/ClientProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,11 +22,13 @@ export default function RootLayout({
       <body
         className={`flex bg-slate-50 text-slate-800 dark:bg-slate-800 dark:text-slate-100 ${inter.className}`}
       >
-        <Sidebar />
-        <main className="mx-auto w-full max-w-7xl overflow-y-auto p-10">
-          <Search />
-          {children}
-        </main>
+        <ClientProvider>
+          <Sidebar />
+          <main className="mx-auto w-full max-w-7xl overflow-y-auto p-10">
+            <Search />
+            {children}
+          </main>
+        </ClientProvider>
       </body>
     </html>
   )
